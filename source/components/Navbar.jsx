@@ -13,7 +13,7 @@ export default function Navbar() {
             </div>
 
             <div>
-                <ul>
+                <ul className='socials'>
                     <li>ig</li>
                     <li>github</li>
                     <li>linkedin</li>

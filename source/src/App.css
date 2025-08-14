@@ -1,8 +1,9 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+    width: 100%;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .logo {
@@ -39,4 +40,24 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.main {
+    width: 100%;
+    display: flex;
+}
+
+html, body {
+    height: 100%;
+    min-height: 100%;
+}
+
+.content {
+    height: 500px;
+    width: 500px;
+    background-color: white;
+}
+
+.socials {
+    display: flex;
 }
