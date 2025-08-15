@@ -1,11 +1,16 @@
 import {Link, useMatch, useResolvedPath} from "react-router-dom"
-import { FaLinkedin, FaGithub, FaInstagram   } from "react-icons/fa";
+import { FaLinkedin, FaGithub } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa6";
+
 
 export default function Navbar() {
     return (
         <nav className="nav">
 
             <div>
+
+                <div id='profile-picture'></div>
+
                 <ul>
                     <CustomLink to="../about">Home</CustomLink>
                     <CustomLink to="../contact">Resume</CustomLink>
