@@ -1,4 +1,5 @@
 import {Link, useMatch, useResolvedPath} from "react-router-dom"
+import { FaLinkedin, FaGithub, FaInstagram   } from "react-icons/fa";
 
 export default function Navbar() {
     return (
@@ -14,9 +15,10 @@ export default function Navbar() {
 
             <div>
                 <ul className='socials'>
-                    <li>ig</li>
-                    <li>github</li>
-                    <li>linkedin</li>
+                    <li><FaInstagram /></li>
+                    <li><FaGithub /></li>
+                    <li><FaLinkedin />
+                    </li>
                 </ul>
             </div>
 
