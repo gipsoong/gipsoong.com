@@ -60,6 +60,8 @@ html, body {
 
 .socials {
     display: flex;
+    justify-content: space-around;
+    width: 70%;
 }
 
 ul {
@@ -87,6 +89,7 @@ nav div {
     flex: 5 0 auto;
 }
 
-ul {
+nav ul {
     padding: 0;
+    text-align: center;
 }
