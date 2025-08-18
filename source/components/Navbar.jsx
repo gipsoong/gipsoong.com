@@ -20,10 +20,9 @@ export default function Navbar() {
 
             <div>
                 <ul className='socials'>
-                    <li><FaInstagram /></li>
-                    <li><FaGithub /></li>
-                    <li><FaLinkedin />
-                    </li>
+                    <li><a href='https://www.instagram.com/gipsoong/' target='_blank'><FaInstagram /></a></li>
+                    <li><a href='https://github.com/gipsoong' target='_blank'><FaGithub /></a></li>
+                    <li><a href='https://www.linkedin.com/in/gipsoong/' target='_blank'><FaLinkedin /></a></li>
                 </ul>
             </div>
 
