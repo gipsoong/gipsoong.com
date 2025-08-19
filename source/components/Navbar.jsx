@@ -11,7 +11,7 @@ export default function Navbar() {
 
                 <div id='profile-picture'></div>
 
-                <ul>
+                <ul className='links'>
                     <CustomLink to="../about">Home</CustomLink>
                     <CustomLink to="../contact">Resume</CustomLink>
                     <CustomLink to="../faq">Projects</CustomLink>
