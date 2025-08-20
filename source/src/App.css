@@ -52,10 +52,6 @@ html, body {
     min-height: 100%;
 }
 
-.content {
-    background-color: #f2f2f2;
-}
-
 .socials {
     display: flex;
     justify-content: space-around;
@@ -88,7 +84,9 @@ nav div {
 }
 
 .content {
-    flex: 7 0 auto;
+    flex: 4 auto;
+    padding: 50px;
+    background-color: black;
 }
 
 nav ul {
@@ -97,5 +95,9 @@ nav ul {
 }
 
 a {
+    color: white;
+}
+
+.intro {
     color: white;
 }
