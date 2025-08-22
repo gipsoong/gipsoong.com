@@ -84,7 +84,7 @@ nav div {
 }
 
 .content {
-    flex: 4 auto;
+    flex: 5 0 auto;
     padding: 50px;
     background-color: black;
 }
