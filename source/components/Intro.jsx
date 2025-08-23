@@ -10,6 +10,16 @@ export default function Intro() {
 
             <div className='experience'>
                 <h2>Experience</h2>
+                <div>
+
+                    <div className='tech-stack'></div>
+
+                    <ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
             </div>
 
             <div className='projects'>
