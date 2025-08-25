@@ -15,9 +15,18 @@ export default function Intro() {
                     <div className='tech-stack'></div>
 
                     <ul>
-                        <li></li>
-                        <li></li>
-                        <li></li>
+                        <li>
+                            <h4>Project Coordinator - Digipixel</h4>
+                            <span>July 2025 - Present</span>
+                        </li>
+                        <li>
+                            <h4>Web Tech - Digipixel</h4>
+                            <span>January 2025 - July 2025</span>
+                        </li>
+                        <li>
+                            <h4>Junior Digital Media Executive - Firstcom Solutions</h4>
+                            <span>September 2020 - February 2021</span>
+                        </li>
                     </ul>
                 </div>
             </div>
