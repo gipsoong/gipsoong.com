@@ -12,7 +12,18 @@ export default function Intro() {
                 <h2>Experience</h2>
                 <div>
 
-                    <div className='tech-stack'></div>
+                    <div className='tech-stack'>
+                        <div>
+                            <h3>Interface Design</h3>
+                        </div>
+                        <div>
+                            <h3>Project Management</h3>
+                        </div>
+                        <div>
+                            <h3>Front-end Development</h3>
+                        </div>
+
+                    </div>
 
                     <ul>
                         <li>
