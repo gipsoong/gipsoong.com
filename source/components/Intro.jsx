@@ -15,12 +15,15 @@ export default function Intro() {
                     <div className='tech-stack'>
                         <div>
                             <h3>Interface Design</h3>
+                            <p>Lorem ipsum</p>
                         </div>
                         <div>
                             <h3>Project Management</h3>
+                            <p>Lorem ipsum</p>
                         </div>
                         <div>
                             <h3>Front-end Development</h3>
+                            <p>Lorem ipsum</p>
                         </div>
 
                     </div>

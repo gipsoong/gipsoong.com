@@ -101,3 +101,15 @@ a {
 .intro {
     color: white;
 }
+
+.tech-stack {
+    display: flex;
+    gap: 2em;
+}
+
+.tech-stack div {
+    padding: 25px 50px;
+    background-color: white;
+    border-radius: 5px;
+    color: black;
+}
