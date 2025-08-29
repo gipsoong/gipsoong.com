@@ -113,3 +113,8 @@ a {
     border-radius: 5px;
     color: black;
 }
+
+.experience li {
+    display: flex;
+    flex-direction: column;
+}
