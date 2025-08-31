@@ -1,4 +1,4 @@
-export default function Intro() {
+export default function Landing() {
     return (
         <div>
             <div className='intro'>

@@ -4,7 +4,7 @@ import viteLogo from '/vite.svg'
 import React from "react";
 import './App.css'
 import Navbar from '../components/Navbar'
-import Intro from '../components/Intro'
+import Landing from '../components/Landing.jsx'
 import {Route, Routes} from 'react-router-dom'
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
         <div className='main'>
             <Navbar/>
             <div className='content'>
-                <Intro/>
+                <Landing/>
                 <Routes>
                     <Route path="/" component={App} />
                 </Routes>
