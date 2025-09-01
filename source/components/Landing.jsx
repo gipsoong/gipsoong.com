@@ -50,6 +50,14 @@ export default function Landing() {
 
             <div className='projects'>
                 <h2>Projects</h2>
+
+                <div className='projects-content'>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
             </div>
         </div>
 
