@@ -40,7 +40,7 @@ export default function Landing() {
                             <span>January 2025 - July 2025</span>
                         </li>
                         <li>
-                            <h4>Junior Digital Media Executive</h4>
+                            <h4>Digital Media Executive</h4>
                             <span>Firstcom Solutions</span>
                             <span>September 2020 - February 2021</span>
                         </li>
