@@ -13,15 +13,15 @@ export default function Landing() {
                 <div>
 
                     <div className='tech-stack'>
-                        <div id='interface-design'>
+                        <div id='interface-design' className='tech-stack-cards'>
                             <h3>Interface Design</h3>
                             <p>Lorem ipsum</p>
                         </div>
-                        <div  id='project-management'>
+                        <div id='project-management' className='tech-stack-cards'>
                             <h3>Project Management</h3>
                             <p>Lorem ipsum</p>
                         </div>
-                        <div  id='front-end-development'>
+                        <div  id='front-end-development' className='tech-stack-cards'>
                             <h3>Front-end Development</h3>
                             <p>Lorem ipsum</p>
                         </div>

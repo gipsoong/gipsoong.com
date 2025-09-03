@@ -118,3 +118,7 @@ a {
     display: flex;
     flex-direction: column;
 }
+
+.tech-stack-cards:hover {
+    background-color: lightgrey;
+}
