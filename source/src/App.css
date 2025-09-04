@@ -119,6 +119,11 @@ a {
     flex-direction: column;
 }
 
+.grow {
+    transition: all .2s ease-in-out;
+}
+
 .tech-stack-cards:hover {
     background-color: lightgrey;
+    transform: scale(1.025);
 }
