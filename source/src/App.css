@@ -124,6 +124,5 @@ a {
 }
 
 .tech-stack-cards:hover {
-    background-color: lightgrey;
     transform: scale(1.025);
 }
