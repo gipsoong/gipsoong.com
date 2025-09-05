@@ -1,6 +1,6 @@
 export default function Landing() {
     return (
-        <div>
+        <div className="landing-wrapper">
             <div className='intro'>
                 <span>Hello!</span>
                 <h1>Hi, I'm Ryan,</h1>

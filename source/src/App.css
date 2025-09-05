@@ -126,3 +126,9 @@ a {
 .tech-stack-cards:hover {
     transform: scale(1.025);
 }
+
+.landing-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
