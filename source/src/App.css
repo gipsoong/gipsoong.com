@@ -139,3 +139,8 @@ a {
     gap: 0.5em;
     text-align: left;
 }
+
+.links li {
+    padding: 1em 2em;
+    background-color: #213547;
+}
