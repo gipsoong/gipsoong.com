@@ -1,6 +1,10 @@
 import {Link, useMatch, useResolvedPath} from "react-router-dom"
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa6";
+import { IoIosHome } from "react-icons/io";
+import { CiPaperplane } from "react-icons/ci";
+import { FaGamepad } from "react-icons/fa";
+
 
 
 export default function Navbar() {
@@ -12,9 +16,9 @@ export default function Navbar() {
                 <div id='profile-picture'></div>
 
                 <ul className='links'>
-                    <CustomLink to="../about">Home</CustomLink>
-                    <CustomLink to="../contact">Resume</CustomLink>
-                    <CustomLink to="../faq">Projects</CustomLink>
+                    <CustomLink to="../about"><IoIosHome />Home</CustomLink>
+                    <CustomLink to="../contact"><CiPaperplane />Resume</CustomLink>
+                    <CustomLink to="../faq"><FaGamepad />Projects</CustomLink>
                 </ul>
             </div>
 
