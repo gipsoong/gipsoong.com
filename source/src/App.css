@@ -140,13 +140,15 @@ a {
     text-align: left;
 }
 
-.links li {
-    padding: 1em 2em;
-    background-color: #213547;
-}
-
 .links a {
     display: flex;
     justify-content: center;
     gap: 0.5em;
+    padding: 1em 2em;
+    background-color: #213547;
+}
+
+.links a:hover {
+    background-color: black;
+    color: white;
 }
