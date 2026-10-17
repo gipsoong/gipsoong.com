@@ -12,7 +12,8 @@ const { label = 'Get in touch', class: cls = '' } = Astro.props;
 </span>
 <script>
   // The address is only assembled when someone asks for it, which keeps it away from simple scrapers.
-  document.querySelectorAll<HTMLButtonElement>('.contact-btn').forEach((btn) => {
+  // Runs on every page change, since pages are swapped in without a reload.
+  document.addEventListener('astro:page-load', () => document.querySelectorAll<HTMLButtonElement>('.contact-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
       const email = atob(btn.dataset.e || '');
       const out = btn.nextElementSibling as HTMLElement;
@@ -27,7 +28,7 @@ const { label = 'Get in touch', class: cls = '' } = Astro.props;
       };
       a.focus();
     });
-  });
+  }));
 </script>
 <style>
   .contact-out{display:inline-flex;flex-wrap:wrap;align-items:center;gap:10px}
