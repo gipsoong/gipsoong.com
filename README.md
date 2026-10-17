@@ -19,6 +19,10 @@ If `SANITY_PROJECT_ID` is not set, the site builds with the placeholder content 
 
 ### 1. Sanity (content editor)
 
+**All in the browser (no local machine):** create the project at sanity.io/manage, then in Cloudflare import this repo a second time with root directory `studio`, build command `npm run build`, deploy command `npx wrangler deploy`, and build variable `SANITY_STUDIO_PROJECT_ID`. Give it a custom domain such as `studio.gipsoong.com`, and add that URL under **API → CORS origins** in sanity.io/manage with "Allow credentials" ticked.
+
+**Or from a terminal:**
+
 ```sh
 cd studio
 npm install

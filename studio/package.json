@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "sanity dev",
     "build": "sanity build",
-    "deploy": "sanity deploy"
+    "deploy": "sanity deploy",
+    "cf-deploy": "sanity build --yes && npx wrangler@4.147.0 deploy"
   },
   "dependencies": {
     "react": "19.3.0",
