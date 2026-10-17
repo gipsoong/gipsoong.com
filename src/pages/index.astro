@@ -72,7 +72,7 @@ import Base from '../layouts/Base.astro';
   <span class="go"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> wander over to /play</span>
 </a>
 </main>
-<script is:inline>
+<script is:inline data-astro-rerun>
 (function(){
 const body=document.body, root=document.documentElement;
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -105,7 +105,8 @@ function setSide(s, x, y){
   state=s||null;
   if(s) body.dataset.side=s; else delete body.dataset.side;
 }
-function go(side){ location.href = side==='left' ? '/work' : '/play'; }
+// clicking the real link lets the router swap the page instead of reloading it
+function go(side){ document.getElementById(side==='left' ? 'linkL' : 'linkR').click(); }
 let labelSide=null, hovered=null;
 [['linkL','left'],['linkR','right']].forEach(([id,s])=>{
   const a=document.getElementById(id);
@@ -117,7 +118,8 @@ let labelSide=null, hovered=null;
 
 // hemispheres of the line drawing pick a side; touch needs a tap to preview, a second tap to enter
 let touchSel=null, lastPointer='mouse';
-addEventListener('pointerdown',e=>{lastPointer=e.pointerType},true);
+const ac=new AbortController(); document.addEventListener('astro:before-swap',()=>ac.abort(),{once:true});
+addEventListener('pointerdown',e=>{lastPointer=e.pointerType},{capture:true,signal:ac.signal});
 document.querySelectorAll('.hemi').forEach(h=>{
   const s=h.dataset.side;
   h.addEventListener('pointerenter',e=>{ if(e.pointerType==='touch') return; hovered=s; if(!labelSide) setSide(s,e.clientX,e.clientY); });
@@ -127,7 +129,7 @@ document.querySelectorAll('.hemi').forEach(h=>{
     else go(s);
   });
 });
-document.addEventListener('click',e=>{ if(lastPointer==='touch' && !e.target.closest('.hemi,.side')){ touchSel=null; hovered=null; setSide(null); } });
+document.addEventListener('click',e=>{ if(lastPointer==='touch' && !e.target.closest('.hemi,.side')){ touchSel=null; hovered=null; setSide(null); } },{signal:ac.signal});
 })();
 </script>
 </Base>

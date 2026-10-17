@@ -31,10 +31,28 @@ const projectFields = `title, "slug": slug.current, client, year, role, summary,
 
 export async function getProjects(): Promise<Project[]> {
   if (!client) return placeholderProjects;
-  return client.fetch(`*[_type == "project" && defined(slug.current)] | order(order asc, year desc) { ${projectFields} }`);
+  const rows: Partial<Project>[] = await client.fetch(`*[_type == "project" && defined(slug.current)] | order(order asc, year desc) { ${projectFields} }`);
+  // Studio fields are optional, so a half-filled case study must not break the build.
+  return rows.map((p) => ({
+    ...p,
+    title: p.title ?? '',
+    slug: p.slug ?? '',
+    client: p.client ?? '',
+    year: p.year ?? new Date().getFullYear(),
+    role: p.role ?? '',
+    summary: p.summary ?? '',
+    challenge: p.challenge ?? '',
+    whatIDid: p.whatIDid ?? [],
+    result: p.result ?? '',
+    tags: p.tags ?? [],
+    liveUrl: p.liveUrl ?? null,
+    cover: p.cover ?? null,
+    screenshots: p.screenshots ?? [],
+  }));
 }
 
 export async function getPhotoSets(): Promise<PhotoSet[]> {
   if (!client) return placeholderSets;
-  return client.fetch(`*[_type == "photoSet" && defined(slug.current)] | order(order asc) { title, "slug": slug.current, blurb, cover, tint, photos[] { "image": @, caption } }`);
+  const rows: Partial<PhotoSet>[] = await client.fetch(`*[_type == "photoSet" && defined(slug.current)] | order(order asc) { title, "slug": slug.current, blurb, cover, tint, photos[] { "image": @, caption } }`);
+  return rows.map((s) => ({ ...s, title: s.title ?? '', slug: s.slug ?? '', blurb: s.blurb ?? '', cover: s.cover ?? null, photos: s.photos ?? [] }));
 }
