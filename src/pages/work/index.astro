@@ -1,0 +1,121 @@
+---
+import Base from '../../layouts/Base.astro';
+import WorkHeader from '../../components/WorkHeader.astro';
+import ContactButton from '../../components/ContactButton.astro';
+import Squiggle from '../../components/Squiggle.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { cv } from '../../data/cv';
+import { getProjects } from '../../lib/content';
+const projects = (await getProjects()).slice(0, 3);
+---
+<Base title={`${cv.name} · ${cv.role}`} description={`${cv.name}, ${cv.role.toLowerCase()} in ${cv.location}. ${cv.tagline}`} world="work">
+  <div class="grid-bg">
+    <WorkHeader />
+    <main id="main" class="wrap">
+      <section class="hero">
+        <div class="eyebrow">{cv.role.toUpperCase()} · {cv.location.toUpperCase()}</div>
+        <h1>{cv.name}</h1>
+        <Squiggle width={260} />
+        <p class="tag">{cv.tagline}</p>
+        <div class="actions">
+          <ContactButton class="btn primary" />
+          {cv.cvPdf && <a class="btn" href={cv.cvPdf} download>Download CV</a>}
+          <a class="btn" href={cv.linkedin} rel="noopener">LinkedIn</a>
+        </div>
+      </section>
+
+      <section id="about" class="row">
+        <h2 class="label">// ABOUT</h2>
+        <div class="col">
+          <p class="lead">{cv.about}</p>
+          <p class="muted">{cv.aboutMore}</p>
+        </div>
+      </section>
+
+      <section class="row">
+        <h2 class="label">// WHAT I DO</h2>
+        <div class="col cards3">
+          {cv.whatIDo.map((w) => (
+            <div class="tile"><h3>{w.title}</h3><p>{w.body}</p></div>
+          ))}
+        </div>
+      </section>
+
+      <section class="row">
+        <h2 class="label">// SKILLS</h2>
+        <ul class="col chips">
+          {cv.skills.map((s) => <li>{s}</li>)}
+          <li class="dim">{cv.languages}</li>
+        </ul>
+      </section>
+
+      <section id="experience" class="row">
+        <h2 class="label">// EXPERIENCE</h2>
+        <ol class="col timeline">
+          {cv.experience.map((e) => (
+            <li><span class="when">{e.when}</span><div><strong>{e.title}</strong><div class="muted">{e.org}{e.note && ` · ${e.note}`}</div></div></li>
+          ))}
+        </ol>
+      </section>
+
+      <section class="row">
+        <h2 class="label">// EDUCATION</h2>
+        <ul class="col edu">
+          {cv.education.map((e) => <li><strong>{e.title}</strong> <span class="muted">· {e.org}{e.when && ` · ${e.when}`}</span></li>)}
+        </ul>
+      </section>
+
+      <section id="projects" class="projects">
+        <div class="phead">
+          <h2>Selected work</h2>
+          <a href="/work/projects" class="all">see all projects →</a>
+        </div>
+        <div class="pgrid">{projects.map((p) => <ProjectCard project={p} />)}</div>
+      </section>
+
+      <section class="cta">
+        <p>Got a launch coming up?</p>
+        <ContactButton label="Send me a message" class="btn dark" />
+      </section>
+    </main>
+  </div>
+</Base>
+<style>
+  main{padding-bottom:96px}
+  .hero{padding-block:56px 64px;border-bottom:1px solid var(--ink-line)}
+  .eyebrow{font:13px var(--mono);letter-spacing:.1em;color:var(--volt-soft);margin-bottom:20px}
+  h1{margin:0 0 6px;font-size:clamp(44px,7vw,96px);font-weight:600;letter-spacing:-.03em;line-height:.95;text-wrap:balance}
+  .tag{margin:24px 0 0;max-width:640px;font-size:22px;line-height:1.45;color:#C5CAD6}
+  .actions{margin-top:36px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+  :global(.btn){display:inline-flex;align-items:center;min-height:48px;padding:0 22px;border-radius:8px;border:1px solid #3A3F4B;background:transparent;color:var(--ink-fg);text-decoration:none;font:500 16px var(--sans);cursor:pointer;transition:transform .15s}
+  :global(.btn:hover){transform:translateY(-2px)}
+  :global(.btn.primary){background:var(--volt);border-color:var(--volt);color:#fff}
+  :global(.btn.dark){background:var(--ink);border-color:var(--ink);color:#fff}
+  .row{padding-block:56px;border-bottom:1px solid var(--ink-line);display:flex;flex-wrap:wrap;gap:24px 32px}
+  .label{flex:1 1 200px;margin:0;font:500 14px var(--mono);letter-spacing:.1em;color:#8A91A1}
+  .col{flex:999 1 560px;min-width:0;margin:0;padding:0}
+  .lead{margin:0;font-size:24px;line-height:1.5}
+  .muted{color:var(--ink-muted)}
+  .col .muted{margin:16px 0 0;font-size:17px}
+  .timeline .muted,.edu .muted{margin:0;font-size:inherit}
+  .cards3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+  .tile{background:var(--ink-2);border:1px solid var(--ink-line);border-radius:12px;padding:24px}
+  .tile h3{margin:0 0 8px;font-size:19px}
+  .tile p{margin:0;font-size:15px;line-height:1.6;color:#B4BAC8}
+  .chips{list-style:none;display:flex;flex-wrap:wrap;gap:10px}
+  .chips li{font:14px var(--mono);padding:8px 14px;border:1px solid #3A3F4B;border-radius:999px}
+  .chips .dim{color:var(--ink-muted)}
+  .timeline{list-style:none;display:flex;flex-direction:column;gap:28px}
+  .timeline li{display:flex;flex-wrap:wrap;gap:4px 24px}
+  .when{flex:0 0 160px;font:14px var(--mono);color:var(--volt-soft);padding-top:3px}
+  .timeline strong{font-size:19px;font-weight:600}
+  .edu{list-style:none;display:flex;flex-direction:column;gap:14px;font-size:17px}
+  .projects{padding-top:64px}
+  .phead{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:baseline;margin-bottom:28px}
+  .phead h2{margin:0;font-size:32px;font-weight:600}
+  .all{font:15px var(--mono);color:var(--volt-soft)}
+  .pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+  .cta{margin-top:96px;padding:40px;border-radius:18px;background:var(--volt);color:#fff;display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center}
+  .cta p{margin:0;font-size:clamp(26px,4vw,44px);font-weight:600;letter-spacing:-.02em;line-height:1.1}
+  .cta :global(.contact-mail){color:#fff}
+</style>

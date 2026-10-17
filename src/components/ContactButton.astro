@@ -1,0 +1,37 @@
+---
+import { cv } from '../data/cv';
+interface Props { label?: string; class?: string }
+const { label = 'Get in touch', class: cls = '' } = Astro.props;
+---
+<span class="contact">
+  <button type="button" class={`contact-btn ${cls}`} data-e={cv.emailB64}>{label}</button>
+  <span class="contact-out" hidden>
+    <a class="contact-mail"></a>
+    <button type="button" class="contact-copy">Copy</button>
+  </span>
+</span>
+<script>
+  // The address is only assembled when someone asks for it, which keeps it away from simple scrapers.
+  document.querySelectorAll<HTMLButtonElement>('.contact-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const email = atob(btn.dataset.e || '');
+      const out = btn.nextElementSibling as HTMLElement;
+      const a = out.querySelector('a')!;
+      a.href = `mailto:${email}`;
+      a.textContent = email;
+      out.hidden = false;
+      btn.hidden = true;
+      out.querySelector<HTMLButtonElement>('.contact-copy')!.onclick = async (e) => {
+        const b = e.currentTarget as HTMLButtonElement;
+        try { await navigator.clipboard.writeText(email); b.textContent = 'Copied'; } catch { getSelection()?.selectAllChildren(a); }
+      };
+      a.focus();
+    });
+  });
+</script>
+<style>
+  .contact-out{display:inline-flex;flex-wrap:wrap;align-items:center;gap:10px}
+  .contact-out[hidden]{display:none}
+  .contact-mail{font-family:var(--mono);font-size:15px;word-break:break-all}
+  .contact-copy{font:500 13px var(--mono);min-height:36px;padding:0 12px;border-radius:999px;border:1px solid currentColor;background:transparent;color:inherit;cursor:pointer}
+</style>

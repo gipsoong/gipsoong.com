@@ -1,0 +1,57 @@
+---
+import Base from '../../layouts/Base.astro';
+import PlayHeader from '../../components/PlayHeader.astro';
+import ContactButton from '../../components/ContactButton.astro';
+import { getPhotoSets, img } from '../../lib/content';
+const sets = await getPhotoSets();
+const tints = ['green', 'blue', 'pink', 'yellow', 'red'];
+const tilts = [-1.5, 1, -0.75, 1.25, -1];
+---
+<Base title="Play · Ryan Gip Soong" description="Photography and side projects by Ryan Gip Soong." world="play">
+  <PlayHeader />
+  <main id="main" class="wrap">
+    <section class="intro">
+      <h1>Things I make <em class="hl">for fun.</em></h1>
+      <p>Photography, side projects and whatever has caught my eye lately. No KPIs here.</p>
+    </section>
+    <ul class="sets">
+      {sets.map((s, i) => {
+        const cover = img(s.cover, 700);
+        const tint = s.tint || tints[i % tints.length];
+        return (
+          <li style={`--tilt:${tilts[i % tilts.length]}deg;--tape:var(--p-${tint})`}>
+            <a class="print" href={`/play/${s.slug}`}>
+              <span class="tape" aria-hidden="true"></span>
+              {cover ? <img src={cover} alt={s.cover?.alt || ''} loading="lazy" width="700" height="875" /> : <span class="photo-ph" style={`--bg:var(--p-${tint})`} aria-hidden="true">[COVER PHOTO]</span>}
+              <span class="cap"><span class="t">{s.title}</span><span class="n">{s.photos.length} photos</span></span>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+    <section class="hi">
+      <p>Want to say hi?</p>
+      <ContactButton label="Send me a message" class="pill-btn" />
+    </section>
+  </main>
+</Base>
+<style>
+  main{padding-bottom:96px}
+  .intro{padding-block:48px 56px;display:flex;flex-wrap:wrap;gap:24px 48px;align-items:flex-end}
+  h1{flex:1 1 480px;margin:0;font:400 clamp(52px,9vw,128px)/.92 var(--serif);text-wrap:balance}
+  h1 em{--hl:var(--p-pink)}
+  .intro p{flex:1 1 280px;margin:0;font-size:18px;line-height:1.6;color:var(--paper-muted)}
+  .sets{list-style:none;margin:0;padding:16px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:48px 32px}
+  .print{position:relative;display:block;text-decoration:none;color:var(--paper-fg);background:var(--paper-2);padding:14px 14px 18px;box-shadow:0 8px 24px rgba(30,30,30,.10);transform:rotate(var(--tilt));transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
+  .print:hover,.print:focus-visible{transform:rotate(0) translateY(-6px);box-shadow:0 18px 40px rgba(30,30,30,.16)}
+  .tape{position:absolute;top:-12px;left:50%;width:84px;height:24px;margin-left:-42px;background:var(--tape);opacity:.85;transform:rotate(-4deg)}
+  .print img,.photo-ph{display:block;width:100%;aspect-ratio:4/5;object-fit:cover}
+  .photo-ph{display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--bg) 35%,#fff);font:13px var(--mono);color:#555}
+  .cap{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:14px}
+  .t{font:30px var(--serif)}
+  .n{font:12px var(--mono);color:var(--paper-muted)}
+  .hi{margin-top:112px;padding-top:36px;border-top:1px solid var(--paper-line);display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center}
+  .hi p{margin:0;font:italic clamp(28px,4vw,44px) var(--serif)}
+  :global(.pill-btn){min-height:52px;padding:0 26px;border-radius:999px;border:2px solid var(--paper-fg);background:var(--p-yellow);color:var(--paper-fg);font:500 16px var(--sans);cursor:pointer;transition:transform .2s}
+  :global(.pill-btn:hover){transform:rotate(-2deg) scale(1.03)}
+</style>

@@ -1,0 +1,25 @@
+---
+import Base from '../../layouts/Base.astro';
+import WorkHeader from '../../components/WorkHeader.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import Squiggle from '../../components/Squiggle.astro';
+import { getProjects } from '../../lib/content';
+const projects = await getProjects();
+---
+<Base title="Projects · Ryan Gip Soong" description="Case studies from web builds, migrations and go-lives." world="work">
+  <div class="grid-bg">
+    <WorkHeader />
+    <main id="main" class="wrap">
+      <a class="back" href="/work">← back to CV</a>
+      <h1>Projects</h1>
+      <Squiggle width={180} />
+      <div class="pgrid">{projects.map((p) => <ProjectCard project={p} />)}</div>
+    </main>
+  </div>
+</Base>
+<style>
+  main{padding-block:32px 96px}
+  .back{font:14px var(--mono);color:var(--ink-muted)}
+  h1{margin:24px 0 6px;font-size:clamp(40px,6vw,72px);letter-spacing:-.03em}
+  .pgrid{margin-top:40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+</style>

@@ -1,0 +1,32 @@
+/* Two worlds: work (dark grid, electric blue) and play (off-white, pastel accents), drawn with imperfect lines. */
+:root{
+  --ink:#0F1115; --ink-2:#171A21; --ink-line:#262A33; --ink-fg:#E8EAF0; --ink-muted:#A9B0BF; --volt:#4D7CFE; --volt-soft:#8EA6FF;
+  --paper:#FBFAF6; --paper-2:#FFFFFF; --paper-fg:#222222; --paper-muted:#5E5A55; --paper-line:#E4E0D8;
+  --p-green:#7BC496; --p-red:#EE7B6E; --p-blue:#79A9E6; --p-pink:#EE94BC; --p-yellow:#F2C14E;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+  --sans:'IBM Plex Sans',system-ui,sans-serif;
+  --serif:'Instrument Serif',Georgia,serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--sans);line-height:1.5}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--volt);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip{position:absolute;left:12px;top:-60px;z-index:99;padding:10px 14px;border-radius:8px;background:#fff;color:#111}
+.skip:focus{top:12px}
+
+/* worlds */
+.world-work{background:var(--ink);color:var(--ink-fg)}
+.world-work .grid-bg{background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:32px 32px}
+.world-play{background:var(--paper);color:var(--paper-fg)}
+
+/* hand-drawn bits: anything with .rough gets the wobble filter */
+.rough{filter:url(#rough)}
+.hl{background:linear-gradient(transparent 58%,var(--hl,var(--p-yellow)) 58%,var(--hl,var(--p-yellow)) 92%,transparent 92%);padding:0 .2em}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important;scroll-behavior:auto!important}
+}
