@@ -1,0 +1,24 @@
+---
+import { img, type Project } from '../lib/content';
+interface Props { project: Project }
+const { project: p } = Astro.props;
+const cover = img(p.cover, 800);
+---
+<a class="card" href={`/work/projects/${p.slug}`}>
+  {cover ? <img src={cover} alt={p.cover?.alt || ''} loading="lazy" width="800" height="500" /> : <div class="ph" aria-hidden="true">[SCREENSHOT]</div>}
+  <div class="body">
+    <h3>{p.title}</h3>
+    <div class="meta">{p.client} · {p.year}</div>
+    <div class="tags">{p.tags.join(' · ')}</div>
+  </div>
+</a>
+<style>
+  .card{display:block;text-decoration:none;color:var(--ink-fg);background:var(--ink-2);border:1px solid var(--ink-line);border-radius:14px;overflow:hidden;transition:border-color .2s,transform .2s}
+  .card:hover{border-color:var(--volt);transform:translateY(-3px)}
+  img,.ph{aspect-ratio:16/10;width:100%;object-fit:cover;background:#222632}
+  .ph{display:flex;align-items:center;justify-content:center;font:13px var(--mono);color:var(--ink-muted)}
+  .body{padding:20px}
+  h3{margin:0;font-size:18px;font-weight:600}
+  .meta{margin-top:6px;font-size:14px;color:var(--ink-muted)}
+  .tags{margin-top:14px;font:12px var(--mono);color:var(--volt-soft)}
+</style>

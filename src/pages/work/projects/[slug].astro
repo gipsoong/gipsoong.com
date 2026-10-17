@@ -1,0 +1,64 @@
+---
+import Base from '../../../layouts/Base.astro';
+import WorkHeader from '../../../components/WorkHeader.astro';
+import Squiggle from '../../../components/Squiggle.astro';
+import { getProjects, img, type Project } from '../../../lib/content';
+export async function getStaticPaths() {
+  return (await getProjects()).map((project) => ({ params: { slug: project.slug }, props: { project } }));
+}
+const { project: p } = Astro.props as { project: Project };
+const cover = img(p.cover, 1600);
+---
+<Base title={`${p.title} · Ryan Gip Soong`} description={p.summary} world="work">
+  <div class="grid-bg">
+    <WorkHeader />
+    <main id="main" class="wrap">
+      <a class="back" href="/work/projects">← all projects</a>
+      <header class="ph">
+        <div class="eyebrow">{p.client.toUpperCase()} · {p.year}</div>
+        <h1>{p.title}</h1>
+        <Squiggle width={200} />
+        <p class="sum">{p.summary}</p>
+        <dl class="facts">
+          <div><dt>Role</dt><dd>{p.role}</dd></div>
+          <div><dt>Stack</dt><dd>{p.tags.join(', ')}</dd></div>
+          {p.liveUrl && <div><dt>Live</dt><dd><a href={p.liveUrl} rel="noopener">{new URL(p.liveUrl).hostname}</a></dd></div>}
+        </dl>
+      </header>
+      {cover ? <img class="cover" src={cover} alt={p.cover?.alt || ''} width="1600" height="1000" /> : <div class="cover ph-img" aria-hidden="true">[COVER SCREENSHOT]</div>}
+      <section class="body">
+        <h2>The challenge</h2>
+        <p>{p.challenge}</p>
+        <h2>What I did</h2>
+        <ul>{p.whatIDid.map((w) => <li>{w}</li>)}</ul>
+        <h2>Result</h2>
+        <p class="result">{p.result}</p>
+      </section>
+      {p.screenshots.length > 0 && (
+        <section class="shots">
+          {p.screenshots.map((s) => <img src={img(s, 1400)} alt={s?.alt || ''} loading="lazy" width="1400" height="875" />)}
+        </section>
+      )}
+    </main>
+  </div>
+</Base>
+<style>
+  main{padding-block:32px 96px}
+  .back{font:14px var(--mono);color:var(--ink-muted)}
+  .ph{padding-block:32px 40px}
+  .eyebrow{font:13px var(--mono);letter-spacing:.1em;color:var(--volt-soft);margin-bottom:16px}
+  h1{margin:0 0 6px;font-size:clamp(40px,6vw,76px);letter-spacing:-.03em;line-height:1;text-wrap:balance}
+  .sum{max-width:680px;font-size:21px;color:#C5CAD6}
+  .facts{display:flex;flex-wrap:wrap;gap:16px 40px;margin:28px 0 0}
+  dt{font:12px var(--mono);letter-spacing:.1em;color:#8A91A1;text-transform:uppercase}
+  dd{margin:4px 0 0}
+  dd a{color:var(--volt-soft)}
+  .cover{width:100%;border-radius:14px;aspect-ratio:16/10;object-fit:cover;background:#222632}
+  .ph-img{display:flex;align-items:center;justify-content:center;font:13px var(--mono);color:var(--ink-muted)}
+  .body{max-width:680px;padding-top:48px}
+  .body h2{font:500 14px var(--mono);letter-spacing:.1em;color:#8A91A1;text-transform:uppercase;margin:40px 0 12px}
+  .body p,.body li{font-size:18px;line-height:1.65;color:#D3D7E0}
+  .result{font-size:22px!important;color:var(--ink-fg)!important}
+  .shots{display:grid;gap:20px;margin-top:56px}
+  .shots img{border-radius:12px;width:100%}
+</style>
