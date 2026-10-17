@@ -4,9 +4,9 @@
   "type": "module",
   "scripts": {
     "dev": "sanity dev",
-    "build": "sanity build",
+    "build": "sanity build --yes",
     "deploy": "sanity deploy",
-    "cf-deploy": "sanity build --yes && npx wrangler@4.147.0 deploy"
+    "cf-deploy": "npm run build && npx wrangler@4.147.0 deploy"
   },
   "dependencies": {
     "react": "19.3.0",
